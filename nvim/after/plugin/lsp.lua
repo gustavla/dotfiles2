@@ -74,6 +74,7 @@ require'lspconfig'.pyright.setup {
     root_dir = function(fname)
         local root_files = {
             'pyrightconfig.json',
+            'pyproject.toml',
         }
         return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
     end,
@@ -89,7 +90,15 @@ require'lspconfig'.pyright.setup {
     }
 }
 
-require'lspconfig'.clangd.setup{}
+require'lspconfig'.clangd.setup{
+    root_dir = function(fname)
+        local root_files = {
+            'pyrightconfig.json',
+            'pyproject.toml',
+        }
+        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+    end
+}
 
 --nvim_lsp.pylance.setup({
   --cmd = {'pyright-langserver', '--stdio'}
@@ -104,6 +113,5 @@ require'lspconfig'.biome.setup{}
 require'lspconfig'.ocamllsp.setup{}
 
 
-
-
-
+cfg = {}
+require "lsp_signature".setup(cfg)

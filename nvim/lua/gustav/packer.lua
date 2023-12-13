@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
 	  run = ':TSUpdate'
   }
 
+  use 'ray-x/lsp_signature.nvim'
   use 'nvie/vim-flake8'
   use 'nvim-treesitter/playground'
   --use 'theprimeagen/harpoon'
