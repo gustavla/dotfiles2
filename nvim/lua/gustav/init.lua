@@ -19,7 +19,7 @@ vim.opt.expandtab = true
 --au BufRead,BufNewFile,BufEnter /path/to/dir/* setlocal ts=2 sts=2 sw=2
 --autocmd BufRead,BufNewFile,BufEnter "/Users/larsson/work/tetracode/src/www/onnx-**/*" lua require'gustav.indent'.setup_indent()
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "cpp,cc,javascript",
+    pattern = "cpp,cc,javascript,ocaml",
     callback = indent.setup_indent,
 })
 
