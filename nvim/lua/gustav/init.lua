@@ -12,9 +12,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
---require('gustav.packer')
-require('gustav.remap')
 require('gustav.lazy')
+require('gustav.remap')
 local indent = require('gustav.indent')
 
 vim.opt.colorcolumn = "79"
