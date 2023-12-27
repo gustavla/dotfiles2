@@ -35,5 +35,5 @@
     default = simple
 [init]
 	defaultBranch = main
-[safe]
-	directory = /Users/larsson/Desktop/tmp5/tetracode
+[http]
+	sslbackend = openssl

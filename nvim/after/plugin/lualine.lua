@@ -1,12 +1,12 @@
-require('lualine').setup({
-    sections = { 
-        lualine_c = {
-            {
-                'filename',
-                file_status = true,
-                path = 3, -- absolute path
-            }
-        }
-    }
-})
+--require('lualine').setup({
+--    sections = { 
+--        lualine_c = {
+--            {
+--                'filename',
+--                file_status = true,
+--                path = 3, -- absolute path
+--            }
+--        }
+--    }
+--})
 
