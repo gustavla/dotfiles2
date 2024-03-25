@@ -6,6 +6,8 @@ M.setup_indent = function()
         vim.fn.expand('%:p'):match('.*src/www/onnx%-optimizer/.*%.h') or
         vim.fn.expand('%:p'):match('.*src/www/onnx%-simplifier/.*%.cpp') or
         vim.fn.expand('%:p'):match('.*src/www/onnx%-simplifier/.*%.h') or
+        vim.fn.expand('%:p'):match('.*torch/.*%.cpp') or
+        vim.fn.expand('%:p'):match('.*torch/.*%.h') or
         vim.fn.expand('%:p'):match('.*%.js') or
         vim.fn.expand('%:p'):match('.*%.ml')
     )

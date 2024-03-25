@@ -18,7 +18,12 @@ vim.keymap.set("n", "<leader>t", ":%s/\\s\\s*$//gc<CR>")
 vim.keymap.set("n", "<leader>*", ":Rg<CR>")
 vim.keymap.set("n", "<leader>r", ":Rg<CR>")
 
+vim.keymap.set("n", "<C-j>", ":cn<CR>")
+vim.keymap.set("n", "<C-k>", ":cp<CR>")
+
 vim.keymap.set("n", "<leader>1", ":w<CR>:source %<CR>")
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 vim.api.nvim_create_user_command("EditRC", function()
     vim.api.nvim_command(":e ~/.config/nvim/lua/gustav/init.lua")

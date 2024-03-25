@@ -35,5 +35,3 @@
     default = simple
 [init]
 	defaultBranch = main
-[http]
-	sslbackend = openssl
