@@ -86,7 +86,12 @@ require("lazy").setup({
     },
     {
         'nvie/vim-flake8',
-        event = "VeryLazy",
+        lazy = true,
+        keys = {
+            {
+                "<F7>", ":call flake8#Flake8()<CR>", desc = "Flake8",
+            },
+        },
     },
     {
         'tpope/vim-fugitive',
@@ -98,6 +103,8 @@ require("lazy").setup({
     },
     {
         'projekt0n/github-nvim-theme',
+        lazy = false,
+        priority = 1000,
         config = function(_, opts)
             require("github-theme").setup({
                 -- -- Overwrite the highlight groups
