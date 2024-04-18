@@ -132,7 +132,7 @@ require("lazy").setup({
     {
         'VonHeikemen/lsp-zero.nvim',
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
+        cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
         branch = 'v3.x',
         dependencies = {
             --- Uncomment these if you want to manage LSP servers from neovim
