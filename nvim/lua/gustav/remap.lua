@@ -25,6 +25,11 @@ vim.keymap.set("n", "<leader>1", ":w<CR>:source %<CR>")
 
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
 vim.api.nvim_create_user_command("EditRC", function()
     vim.api.nvim_command(":e ~/.config/nvim/lua/gustav/init.lua")
 end, {})

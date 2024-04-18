@@ -131,7 +131,8 @@ require("lazy").setup({
     },
     {
         'VonHeikemen/lsp-zero.nvim',
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
+        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
         branch = 'v3.x',
         dependencies = {
             --- Uncomment these if you want to manage LSP servers from neovim
@@ -144,6 +145,7 @@ require("lazy").setup({
             'hrsh7th/nvim-cmp',
             'hrsh7th/cmp-nvim-lsp',
             'L3MON4D3/LuaSnip',
+            "onsails/lspkind.nvim",
         },
         config = function(_, opts)
             local lsp_zero = require('lsp-zero')
@@ -218,23 +220,33 @@ require("lazy").setup({
                 end
             }
 
-            require'lspconfig'.pyright.setup {
-                root_dir = function(fname)
-                    local root_files = {
-                        'pyrightconfig.json',
-                        'pyproject.toml',
-                    }
-                    return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-                end,
-                settings = {
-                    python = {
-                        analysis = {
-                            reportMissingModuleSource = "none",
-                            autoSearchPaths = true,
-                            diagnosticMode = "openFilesOnly",
-                            useLibraryCodeForTypes = true
-                        }
-                    }
+            --require'lspconfig'.pyright.setup {
+            --    root_dir = function(fname)
+            --        local root_files = {
+            --            'pyrightconfig.json',
+            --            'pyproject.toml',
+            --        }
+            --        return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+            --    end,
+            --    settings = {
+            --        python = {
+            --            analysis = {
+            --                reportMissingModuleSource = "none",
+            --                autoSearchPaths = true,
+            --                diagnosticMode = "openFilesOnly",
+            --                useLibraryCodeForTypes = true
+            --            }
+            --        }
+            --    }
+            --}
+
+            require'lspconfig'.pylyzer.setup {
+                autostart = false,
+                python = {
+                    checkOnType = false,
+                    diagnostics = true,
+                    inlayHints = true,
+                    smartCompletion = true
                 }
             }
 
@@ -312,5 +324,32 @@ require("lazy").setup({
                 on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
             }
         end
-    }
+    },
+    {
+        "onsails/lspkind.nvim",
+    },
+    {
+        'hrsh7th/nvim-cmp',
+        config = function(_, opts)
+            local lspkind = require('lspkind')
+            require'cmp'.setup{
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = 'symbol_text', -- show only symbol annotations
+                        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        -- can also be a function to dynamically calculate max width such as 
+                        -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+                        ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                        show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+                        -- The function below will be called before any actual modifications from lspkind
+                        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+                        before = function (entry, vim_item)
+                            return vim_item
+                        end
+                    })
+                }
+            }
+        end
+    },
 }, {})
